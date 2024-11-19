@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invade</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <!-- Video background for menu -->
+    <video id="menu-background" loop muted style="display: none;">
+        <source src="assets/video/video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Main game container -->
+    <div id="game-container">
+        <div id="player" class="game-object"></div>
+        <div id="hud">
+            <div id="score">Score: 0</div>
+            <div id="health">Health: 100</div>
+            <div id="special-cooldown"></div>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="background-music" preload="auto" loop>
+        <source src="assets/sounds/background-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="menu-music" preload="auto" loop>
+        <source src="assets/sounds/menu-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Scripts -->
+    <script defer src="js/menu.js"></script>
+    <script defer src="js/player.js"></script>
+    <script defer src="js/projectiles.js"></script>
+    <script defer src="js/enemies.js"></script>
+    <script defer src="js/announcement.js"></script>
+    <script defer src="js/scoreService.js"></script>
+    <script defer src="js/game.js"></script>
+    <script defer src="js/storyService.js"></script>
+</body>
+</html>

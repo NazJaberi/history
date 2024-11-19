@@ -1,0 +1,426 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+#game-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.game-object {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.player {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.enemy-projectile {
+  position: absolute;
+  background-color: red;
+}
+
+#hud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+#special-cooldown {
+  width: 100px;
+  height: 10px;
+  background-color: #333;
+  margin-top: 5px;
+}
+
+#special-cooldown::before {
+  content: "";
+  display: block;
+  height: 100%;
+  background-color: #4caf50;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  z-index: 10000;
+}
+
+.menu-container h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.menu-container button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.menu-container button:hover {
+  background-color: #f0f0f0;
+}
+
+
+.character-box {
+  width: 220px;
+  height: 350px;
+  margin: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.character-box:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.announcement {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: opacity 1s;
+}
+
+.hidden {
+  display: none;
+}
+
+.music-toggle-button {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.music-toggle-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+#menu-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  object-fit: cover;
+}
+
+/* Update in your styles.css */
+
+.score-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;  /* Ensure this is higher than other elements */
+}
+
+.score-input-container {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;  /* Set fixed width */
+  position: relative;  /* For stacking context */
+}
+
+.score-input-container h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;  /* For stacking context */
+  z-index: 1;  /* Ensure text is above background */
+}
+
+.score-input-container .score-display {
+  color: white;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.score-input-container input {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 1rem auto;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.score-input-container button {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 1rem auto;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.score-input-container button:hover {
+  background-color: #45a049;
+}
+
+.scoreboard-content {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+}
+
+.scoreboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  color: white;
+}
+
+.scoreboard-table th,
+.scoreboard-table td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.scoreboard-table th {
+  background-color: #333;
+}
+
+.scoreboard-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.scoreboard-pagination button {
+  padding: 0.5rem 1rem;
+  background-color: #444;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.scoreboard-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Add to your styles.css */
+
+.score-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.score-overlay.fade-out {
+  opacity: 0;
+}
+
+.score-input-container {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 300px;
+  border: 2px solid #4af;
+  box-shadow: 0 0 20px rgba(0, 100, 255, 0.3);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.player-info {
+  margin: 1.5rem 0;
+  color: #fff;
+}
+
+.player-name {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #4af;
+}
+
+.score-display {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.rank-info {
+  color: #4af;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+
+.story-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.story-overlay.fade-out {
+  opacity: 0;
+}
+
+.story-dialog {
+  background-color: rgba(20, 20, 40, 0.95);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  border: 1px solid rgba(0, 100, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 100, 255, 0.3);
+}
+
+.story-dialog h2 {
+  color: #4af;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+}
+
+.story-text p {
+  color: #cce;
+  line-height: 1.6;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+.story-continue {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.8rem 2rem;
+  background-color: #4af;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.story-continue:hover {
+  background-color: #5bf;
+}
